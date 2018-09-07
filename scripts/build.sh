@@ -10,13 +10,13 @@ GIT_MASTER_REV=$(git rev-parse --short master)
 GIT_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 VERSION="0.2.$GIT_BUILDS"
 
-LDX_VERSION="github.com/hahutton/proxy/cmd.Version=$GIT_BUILDS"
-LDX_MASTER="github.com/hahutton/proxy/cmd.MasterRev=$GIT_MASTER_REV"
+LDX_VERSION="github.com/hahutton/sasp/cmd.Version=$GIT_BUILDS"
+LDX_MASTER="github.com/hahutton/sasp/cmd.MasterRev=$GIT_MASTER_REV"
 
 if [ "$GIT_BRANCH_NAME" != "master" ]; then
     GIT_BRANCH_REV=$(git rev-parse --short HEAD)
-	LDX_BRANCH_NAME="github.com/hahutton/proxy/cmd.BranchName=$GIT_BRANCH_NAME"
-	LDX_BRANCH_REV="github.com/hahutton/proxy/cmd.BranchRev=$GIT_BRANCH_REV"
+	LDX_BRANCH_NAME="github.com/hahutton/sasp/cmd.BranchName=$GIT_BRANCH_NAME"
+	LDX_BRANCH_REV="github.com/hahutton/sasp/cmd.BranchRev=$GIT_BRANCH_REV"
 	export GOLDFLAGS="-X $LDX_VERSION -X $LDX_MASTER -X $LDX_BRANCH_REV -X $LDX_BRANCH_NAME"
 else
 	export GOLDFLAGS="-X $LDX_VERSION -X $LDX_MASTER"
@@ -54,7 +54,7 @@ echo "==> Building..."
     -arch="${XC_ARCH}" \
     -osarch="!darwin/arm !darwin/arm64" \
     -ldflags "${GOLDFLAGS}" \
-    -output "pkg/{{.OS}}_{{.Arch}}/proxy" \
+    -output "pkg/{{.OS}}_{{.Arch}}/sasp" \
     -tags="${GOTAGS}" \
     .
 

@@ -14,19 +14,14 @@
 package main
 
 import "github.com/google/tcpproxy"
-import "net"
-import "os"
 import jww "github.com/spf13/jwalterweatherman"
 
 func main() {
-	ips, err := net.LookupIP("nattest.database.windows.net")
-	if err != nil {
-		jww.ERROR.Println("bad lookup")
-		os.Exit(1)
-	}
 	var p tcpproxy.Proxy
-	var ip = ips[0].String()
-	jww.INFO.Println(ip)
-	p.AddRoute(":1433", tcpproxy.To(ip)) // fallback
-	p.Run()
+	ipPort := "23.99.160.139:1433" //Central US SQL LB/Proxy IP
+
+	jww.SetStdoutThreshold(jww.LevelInfo)
+	jww.INFO.Println("Forwarding to: ", ipPort)
+	p.AddRoute(":1433", tcpproxy.To(ipPort))
+	jww.ERROR.Println(p.Run())
 }

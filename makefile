@@ -15,16 +15,16 @@ dist:
 	@GOTAGS='$(GOTAGS)' sh -c "'$(CURDIR)/scripts/build.sh'"
 
 dev:
-	@echo "--> Building proxy" 
+	@echo "--> Building sasp" 
 	mkdir -p pkg/$(GOOS)_$(GOARCH)/ bin/
 	go install -ldflags '$(GOLDFLAGS)' -tags '$(GOTAGS)'
-	cp $(GOPATH)/bin/proxy bin/
-	cp $(GOPATH)/bin/proxy pkg/$(GOOS)_$(GOARCH)
+	cp $(GOPATH)/bin/sasp bin/
+	cp $(GOPATH)/bin/sasp pkg/$(GOOS)_$(GOARCH)
 
 # linux builds a linux package independent of the source platform
 linux:
 	mkdir -p pkg/linux_amd64/
-	GOOS=linux GOARCH=amd64 go build -ldflags '$(GOLDFLAGS)' -tags '$(GOTAGS)' -o pkg/linux_amd64/proxy
+	GOOS=linux GOARCH=amd64 go build -ldflags '$(GOLDFLAGS)' -tags '$(GOTAGS)' -o pkg/linux_amd64/sasp
 
 format:
 	@echo "--> Running go fmt"
